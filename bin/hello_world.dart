@@ -2,94 +2,180 @@
 
 
 
-import 'dart:io';
+
+
 
 import 'dart:math';
 
-
-
-
 void main(){
-print('выберите режим игры:');
-print('1.человек угадывает');
-print('2. компьютер угадывает');
-
-
-
-while (true) {
-  int choice = int.tryParse(stdin.readLineSync()!)?? 0;
- print('Введите количество раундов:');
-int rounds = int.tryParse(stdin.readLineSync()!)?? 0;
-
- for(int round = 1; round <= rounds; round++){
-print('Раунд $round');
- 
-if (choice == 1){
-  funccomp();
-   
-  }else if (choice == 2){
-funchuman();
-  } 
-}
-}
-}
-
-
-
-funccomp(){
- print('компьютер загадал число:');
- var comp = Random().nextInt(100) + 1; 
-var attempts = 0;
-   while (true) {
-      attempts++;
-var userGuess = int.parse(stdin.readLineSync()!);
-      
-if (userGuess < comp) {
-   print("Больше");
-} else if (userGuess > comp) {
-  print("Меньше");
-} else if (userGuess == comp) {
-  print(" Вы угадали число $comp  за $attempts попыток");
-}
- }
   
-} 
+ Circle circ = Circle(radius: 200, color: 'red');
+ print(circ.color);
+ print(circ.radius);
+
+ Student Bektur = Student(name: 'Bektur', age: 17, point: [12,45,23,19,50]);
+ print(Bektur.srPoint());
+
+car toyota = car(marka: 'toyota', model: 'camry 55', year: 2016);
+toyota.printAll();
+
+book books = book(Author: 'Наполеон Хилл', Name: 'Думай и богатей', year: 1937);
+books.printall();
+
+Rectangle t = Rectangle(height: 30, width: 50);
+print(t.getp());
+print(t.gets());
+
+BankAccount Bish = BankAccount(name: 'Bektur', nomerScheta:203220394);
+ Bish.deposit(summ: 1000);
+  Bish.ShowBalance();
+
+
+Product pepsi = Product(name: 'pepsi', value: 90, Sum: 20);
+pepsi.printAll();
+
+  Triangle l = Triangle(right: 25, left: 25, down: 30);
+ print(l.S());
+   
+}
+
+
+class Circle {
+double radius;
+String color;
+Circle({required this.radius , required this.color});
+
+double getradius(){
+  return radius;
+}
+
+String getcolor(){
+  return color;
+}
+}
 
 
 
-
-
-funchuman(){
-  int min = 1;
-  int max = 100;
-  var attempts = 0;
-  var guessednum = false;
-  print('человек загадал число:');
-  while (!guessednum) {
-    var compGuess = (min + max) ~/ 2;
-    attempts++;
-
-    print(compGuess);
-    print("1. Больше");
-    print("2. Меньше");
-    print("3. Туура");
-
-   int Response = int.tryParse(stdin.readLineSync()!)?? 0;
-
-    switch (Response) {
-      case 1:
-        min = compGuess + 1;
-        break;
-      case 2:
-       max = compGuess - 1;
-        break;
-      case 3:
-        guessednum = true;
-        print('Все угадал за $attempts попыток');
-        break;
-     
+class Student{
+  String name;
+  int age;
+  List <int> point;
+  Student({required this.name, required this.age, required this.point});
+  double srPoint(){
+    int summ =0;
+    for(int i =0; i < point.length; i++){
+      summ += point[i];
     }
-   
+    return summ / point.length;
   }
+  void printAll(){
+    print('$name, $age, $point, ${srPoint()}');
+  }
+}
+
+
+
+class car{
+    String marka;
+    String model;
+    int year;
+ car({required this.marka, required this.model, required this.year}); 
+  printAll(){
+    print('$marka, $model, $year');
+  }  
+}
+
+
+
+class book{
+  String Name;
+  String Author;
+  int year;
+   book({required this.Author, required this.Name,required this.year});
+   printall(){
+    print('$Author, $Name, $year');
+   }
+
+}
+
+
+
+class Rectangle {
+  int width;
+  double height;
+  Rectangle({required this.height, required this.width});
+  double getp(){
+      return (width + height) * 2;
+    }
+    double gets(){
+      return width * height;
+    }
+    
+    
+    
+}
+
+
+class BankAccount {
+  String name;
+  double balance = 5000;
+  int nomerScheta;
+  BankAccount({required this.name, required this.nomerScheta});
+  void deposit({required double summ}){
+    balance+=summ;
+  }
+  void withdrawals({required double summ}){
+
+  balance -= summ;
+
+  }
+  void ShowBalance(){
+    print(balance);
+  }
+
+
+}
+
+
+class Product {
+  String name;
+  int value;
+  int Sum;
+  Product({required this.name, required this.value, required this.Sum});
+   obshvalue(){
+   return value * Sum; 
+  }
+  printAll(){
+    print('$name,$value,$Sum ${obshvalue()}');
+  }
+ 
+    
   
+}
+
+class employee {
+  String name;
+  String jobtitle;
+  double Salary;
+  employee({required this.name, required this.jobtitle, required this.Salary});
+  procent(double percentage ){
+    double a = Salary * (percentage ~/100)  ;
+    Salary+=a;
+  }
+  printall(){
+    print('$name, $jobtitle, $Salary, ');
+  }
+}
+
+class Triangle{
+  int right;
+  int left;
+  int down;
+  Triangle({required this.right,required this.left,required this.down});
+  double S(){
+    double s = (right+left+down) / 2;
+    return (s * (s - right) * (s - left) * (s - down));
+  }
+ 
+
 }
